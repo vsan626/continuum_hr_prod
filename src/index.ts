@@ -1,22 +1,45 @@
 import express from 'express';
-import cors from 'cors';
+import session from 'express-session';
 import db from './database/db';
+import passport from './passport/middlewares';
+import auth from './routes/auth';
+import user from './routes/user';
+import cors from 'cors';
+import config from './config';
 
 const app = express();
 const port = 8080;
 
+// Database connection
 db();
 
+// middlewares
 app.use(express.json());
-
 app.use(
   express.urlencoded({
     extended: true
   })
 );
-
 app.use(cors());
-console.log(db);
+app.use(
+  session({
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    secret: config.sessionSecret!,
+    resave: false,
+    saveUninitialized: true
+  })
+);
+
+// Passport initialization
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Routes
+app.use('/api/auth', auth);
+app.use('/api/user', passport.authenticate('jwt', { session: false }), user);
+
+
+// initialize server
 app.listen(port, async () =>
   console.log(`Listening at http://localhost:${port}`)
 );
