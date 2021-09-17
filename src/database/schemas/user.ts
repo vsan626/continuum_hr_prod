@@ -9,9 +9,11 @@ export const UserSchema = new Schema({
     type: String,
     required: true
   },
-  employeeName: {
-    type: String
-  },
+  employees: [{
+    first_name: String,
+    last_name: String,
+    salary: String,
+  }],
   salary: {
     type: Number
   }

@@ -8,16 +8,15 @@ const router = express.Router();
 /**
  * creates a new user
  */
-router.post(
-  '/register',
-  passport.authenticate('register', { session: false }),
-  async (req, res) => {
-    res.json({
-      message: 'Signup successful',
-      user: req.user
-    });
-  }
-);
+router.post('/register', async (req, res) => {
+  passport.authenticate('register', async (err, message) => {
+    if (err) {
+      return res.status(400).json({ error: err });
+    }
+
+    return res.json(message);
+  })(req, res);
+});
 
 /**
  * login route
@@ -39,7 +38,7 @@ router.post('/login', async (req, res, next) => {
         }
 
         const body = { _id: user._id, username: user.username };
-        console.log('body', body);
+
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const token = jwt.sign({ user: body }, config.jwtSecret!);
 
@@ -50,6 +49,5 @@ router.post('/login', async (req, res, next) => {
     }
   })(req, res, next);
 });
-
 
 export default router;

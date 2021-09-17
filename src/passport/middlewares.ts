@@ -40,9 +40,10 @@ passport.use(
     },
     async (username, password, done) => {
       const exists = await User.exists({ username: username });
+
       // if exists respond with user already exists
       if (exists) {
-        return done(null, false, {
+        return done(null, {
           message: `Username already exists.`
         });
       }
@@ -57,7 +58,7 @@ passport.use(
           });
           newUser.save();
 
-          return done(null, newUser, {
+          return done(null, {
             message: 'User created successfully'
           });
         });
@@ -112,7 +113,6 @@ passport.use(
       secretOrKey: config.jwtSecret!
     },
     async (token, done) => {
-      console.log('token', token);
       try {
         return done(null, token.user);
       } catch (err) {
