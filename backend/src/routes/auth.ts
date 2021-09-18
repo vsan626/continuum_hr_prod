@@ -9,9 +9,13 @@ const router = express.Router();
  * creates a new user
  */
 router.post('/register', async (req, res) => {
-  passport.authenticate('register', async (err, message) => {
+  passport.authenticate('register', async (err, user, message) => {
     if (err) {
       return res.status(400).json({ error: err });
+    }
+
+    if (!user) {
+      return res.status(400).json(message);
     }
 
     return res.json(message);
@@ -44,8 +48,8 @@ router.post('/login', async (req, res, next) => {
 
         return res.json({ token });
       });
-    } catch (error) {
-      return next(error);
+    } catch (err) {
+      return next(err);
     }
   })(req, res, next);
 });

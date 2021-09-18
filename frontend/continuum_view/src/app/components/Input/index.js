@@ -1,17 +1,11 @@
 import * as React from 'react';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 
 const MuiInput = (props) => {
-  const {
-    id,
-    name,
-    usernameError,
-    usernameErrorMessage,
-    placeholder,
-    onChange,
-    helperText
-  } = props;
-  const [currentValue, setCurrentValue] = React.useState('');
+  const { id, name, value, error, errorMessage, label, onChange, type } = props;
+  const [currentValue, setCurrentValue] = React.useState(value);
 
   // prop for error when user already exists
   // props for placeholder
@@ -21,16 +15,19 @@ const MuiInput = (props) => {
     onChange(e);
   };
   return (
-    <Input
-      id={id}
-      name={name}
-      value={currentValue}
-      error={usernameError}
-      variant="outlined"
-      placeholder={placeholder}
-      // helperText={usernameError ? usernameErrorMessage : ''}
-      onChange={setValue}
-    />
+    <FormControl>
+      {label !== undefined ? <InputLabel>{label}</InputLabel> : null}
+      <Input
+        id={id}
+        name={name}
+        value={currentValue}
+        error={error}
+        variant="outlined"
+        onChange={setValue}
+        type={type || "string"}
+      />
+      {error ? <div style={{ color: 'red' }}>{errorMessage}</div> : null}
+    </FormControl>
   );
 };
 

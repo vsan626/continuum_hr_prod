@@ -6,13 +6,13 @@ import MuiInput from '../Input';
 import { logIn } from '../../../api/login';
 
 const initialValues = {
-  username: '',
-  password: ''
+  loginUsername: '',
+  loginPassword: ''
 };
 
 const validationSchema = object().shape({
-  username: string().required('Username is a required field'),
-  password: string().min(6).required('Password is a required field')
+  loginUsername: string().required('Username is a required field'),
+  loginPassword: string().required('Password is a required field')
 });
 
 const LoginForm = () => {
@@ -24,14 +24,30 @@ const LoginForm = () => {
     React.useState('');
 
   const handleSubmit = async (values) => {
-    console.log('in handle', values);
+    console.log('login values', values);
+
+    setPasswordError(false);
+    setPasswordErrorMessage('');
+    setUsernameError(false);
+    setUsernameErrorMessage('');
+    setIsLoading(true);
+
     try {
       await logIn(values);
-      // set loading icon on button
     } catch (err) {
-      console.log('error from handleSubmit', err);
+      const { data } = err;
+      if (data.message === `username ${values.loginUsername} not found`) {
+        setUsernameError(true);
+        setUsernameErrorMessage(data.message);
+      } else if (data.message === 'Incorrect password') {
+        setPasswordError(true);
+        setPasswordErrorMessage(data.message);
+      }
+    } finally {
+      setIsLoading(false);
     }
   };
+
   return (
     <Formik
       initialValues={initialValues}
@@ -44,26 +60,28 @@ const LoginForm = () => {
           <Form onSubmit={props.handleSubmit}>
             <div>
               <MuiInput
-                id="username"
-                name="username"
-                value={props.values.username}
-                placeholder="Username"
-                usernameError={usernameError}
-                usernameErrorMessage="test"
+                id="loginUsername"
+                name="loginUsername"
+                value={props.values.loginUsername}
+                label="Username"
+                error={usernameError}
+                errorMessage={usernameErrorMessage}
                 onChange={props.handleChange}
               />
             </div>
+
             <div>
               <MuiInput
-                id="password"
-                name="password"
-                value={props.values.password}
-                placeholder="Password"
-                usernameError={passwordError}
-                usernameErrorMessage="test pass"
+                id="loginPassword"
+                name="loginPassword"
+                value={props.values.loginPassword}
+                label="Password"
+                error={passwordError}
+                errorMessage={passwordErrorErrorMessage}
                 onChange={props.handleChange}
               />
             </div>
+
             <div>
               <Button isLoading={isLoading} type="submit">
                 submit

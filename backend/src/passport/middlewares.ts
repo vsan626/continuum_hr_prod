@@ -43,7 +43,7 @@ passport.use(
 
       // if exists respond with user already exists
       if (exists) {
-        return done(null, {
+        return done(null, false, {
           message: `Username already exists.`
         });
       }
@@ -82,7 +82,7 @@ passport.use(
           if (err) return done(err);
           if (!user) {
             return done(null, false, {
-              message: `username ${username} not found.`
+              message: `username ${username} not found`
             });
           }
 
