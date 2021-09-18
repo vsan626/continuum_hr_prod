@@ -22,14 +22,14 @@ router.post('/register', async (req, res) => {
  * login route
  */
 router.post('/login', async (req, res, next) => {
-  passport.authenticate('login', async (err, user) => {
+  passport.authenticate('login', async (err, user, message) => {
     try {
       if (err) {
         return res.status(400).json({ error: err });
       }
 
       if (!user) {
-        return res.status(400).json({ error: 'No user found' });
+        return res.status(400).json(message);
       }
 
       req.login(user, { session: false }, async (err) => {
