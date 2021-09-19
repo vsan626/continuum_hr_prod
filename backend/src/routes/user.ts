@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import config from '../config';
 import { User } from '../database/models/user';
+import { User as UserType } from '../Types/user';
 
 const router = express.Router();
 
@@ -47,13 +48,21 @@ router.post('/newemployee', async (req: Request, res: Response) => {
     }
   }
 
-  const exists = await User.find({
-    employees: {
-      $elemMatch: { first_name: firstname, last_name: lastname }
-    }
-  });
+  type responseData = {
+    _id?: string;
+    employees?: [];
+  };
 
-  if (exists.length >= 1) {
+  const exists: responseData = await User.findById(
+    { _id: decoded.user._id },
+    {
+      employees: {
+        $elemMatch: { first_name: firstname, last_name: lastname }
+      }
+    }
+  );
+
+  if (exists.employees.length > 0) {
     return res.status(400).json({
       message: 'This employee already exists'
     });
