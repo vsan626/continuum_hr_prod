@@ -1,11 +1,11 @@
 import * as React from 'react';
 import LoginForm from '../../components/LoginForm';
 
-const LoginPage = () => {
+const LoginPage = ({setAuth}) => {
   return (
     <>
       <div>Log In</div>
-      <LoginForm />
+      <LoginForm setAuth={setAuth}/>
     </>
   );
 };

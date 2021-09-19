@@ -9,11 +9,22 @@ export const UserSchema = new Schema({
     type: String,
     required: true
   },
-  employees: [{
-    first_name: String,
-    last_name: String,
-    salary: String,
-  }],
+  employees: [
+    {
+      first_name: {
+        type: String,
+        required: true
+      },
+      last_name: {
+        type: String,
+        required: true
+      },
+      salary: {
+        type: String,
+        required: true
+      }
+    }
+  ],
   salary: {
     type: Number
   }

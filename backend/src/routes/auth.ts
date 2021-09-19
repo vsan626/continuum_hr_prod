@@ -46,7 +46,7 @@ router.post('/login', async (req, res, next) => {
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const token = jwt.sign({ user: body }, config.jwtSecret!);
 
-        return res.json({ token });
+        return res.status(200).json({ token });
       });
     } catch (err) {
       return next(err);

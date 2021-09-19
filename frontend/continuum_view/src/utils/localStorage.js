@@ -20,3 +20,14 @@ export const destroyToken = () => {
     throw err;
   }
 };
+
+/**
+ * get auth token
+ */
+export const getToken = () => {
+  const token = localStorage.getItem('auth');
+  console.log('token', token);
+  const parsedToken = JSON.stringify(token);
+  console.log({ parsedToken });
+  return parsedToken;
+};

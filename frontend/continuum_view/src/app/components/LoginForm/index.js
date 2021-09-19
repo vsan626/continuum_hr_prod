@@ -4,6 +4,8 @@ import { object, string } from 'yup';
 import Button from '../Button';
 import MuiInput from '../Input';
 import { logIn } from '../../../api/login';
+import { getToken } from '../../../utils/localStorage';
+import { getEmployees } from '../../..//api/getEmployees';
 
 const initialValues = {
   loginUsername: '',
@@ -15,7 +17,7 @@ const validationSchema = object().shape({
   loginPassword: string().required('Password is a required field')
 });
 
-const LoginForm = () => {
+const LoginForm = ({ setAuth }) => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [usernameError, setUsernameError] = React.useState(false);
   const [usernameErrorMessage, setUsernameErrorMessage] = React.useState('');
@@ -33,7 +35,14 @@ const LoginForm = () => {
     setIsLoading(true);
 
     try {
-      await logIn(values);
+      const loginRes = await logIn(values);
+
+      if (loginRes.status === 200) {
+        setAuth(() => {
+          return getToken();
+        });
+      }
+      console.log({ loginRes });
     } catch (err) {
       const { data } = err;
       if (data.message === `username ${values.loginUsername} not found`) {

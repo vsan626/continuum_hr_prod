@@ -7,12 +7,13 @@ axios.defaults.headers.post['Content-Type'] = 'application/json';
 const logIn = async (userCredentials) => {
   const { loginUsername, loginPassword } = userCredentials;
   try {
-    const { data } = await axios.post('/api/auth/login', {
+    const res = await axios.post('/api/auth/login', {
       username: loginUsername,
       password: loginPassword
     });
 
-    saveToken(data.token);
+    saveToken(res.data.token);
+    return res;
   } catch (err) {
     throw err.response;
   }
