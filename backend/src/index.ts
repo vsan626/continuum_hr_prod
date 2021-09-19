@@ -6,6 +6,7 @@ import auth from './routes/auth';
 import user from './routes/user';
 import cors from 'cors';
 import config from './config';
+import path from 'path';
 
 const app = express();
 const port = 8080;
@@ -29,6 +30,9 @@ app.use(
     saveUninitialized: true
   })
 );
+app.use(
+  express.static(path.join(__dirname, '../../frontend/continuum_view/build'))
+);
 
 // Passport initialization
 app.use(passport.initialize());
@@ -37,7 +41,6 @@ app.use(passport.session());
 // Routes
 app.use('/api/auth', auth);
 app.use('/api/user', passport.authenticate('jwt', { session: false }), user);
-
 
 // initialize server
 app.listen(port, async () =>
