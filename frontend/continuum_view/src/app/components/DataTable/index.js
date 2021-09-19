@@ -8,16 +8,23 @@ import {
   TableBody
 } from '@material-ui/core';
 import Paper from '@material-ui/core/paper';
+import { makeStyles } from '@material-ui/core/styles';
 
 // NOTE: render list of current employees
 const DataTable = ({ data, stateTaxDeduction, netSalary }) => {
   const numberWithCommas = (x) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
+  const cc = useStyles();
 
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }}>
+    <TableContainer
+      classes={{
+        root: cc.tableContainer
+      }}
+      component={Paper}
+    >
+      <Table sx={{ minWidth: 375 }}>
         <TableHead>
           <TableRow>
             <TableCell>Employee</TableCell>
@@ -51,5 +58,14 @@ const DataTable = ({ data, stateTaxDeduction, netSalary }) => {
     </TableContainer>
   );
 };
+
+const useStyles = makeStyles({
+  tableContainer: {
+    width: '100%',
+    minWidth: 375,
+    height: '100%'
+  },
+
+});
 
 export default DataTable;

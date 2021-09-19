@@ -5,6 +5,7 @@ import Button from '../Button';
 import MuiInput from '../Input';
 import { logIn } from '../../../api/login';
 import { getToken } from '../../../utils/localStorage';
+import { makeStyles } from '@material-ui/core/styles';
 
 const initialValues = {
   loginUsername: '',
@@ -16,13 +17,14 @@ const validationSchema = object().shape({
   loginPassword: string().required('Password is a required field')
 });
 
-const LoginForm = ({ setAuth }) => {
+const LoginForm = ({ setAuth, customStyles }) => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [usernameError, setUsernameError] = React.useState(false);
   const [usernameErrorMessage, setUsernameErrorMessage] = React.useState('');
   const [passwordError, setPasswordError] = React.useState(false);
   const [passwordErrorErrorMessage, setPasswordErrorMessage] =
     React.useState('');
+  const cc = useStyles();
 
   const handleSubmit = async (values) => {
     setPasswordError(false);
@@ -61,9 +63,10 @@ const LoginForm = ({ setAuth }) => {
       enableReinitialize
     >
       {(props) => {
+        console.log('loginform fomike', customStyles);
         return (
           <Form onSubmit={props.handleSubmit}>
-            <div>
+            <div className={cc.loginUsernameInput}>
               <MuiInput
                 id="loginUsername"
                 name="loginUsername"
@@ -72,6 +75,7 @@ const LoginForm = ({ setAuth }) => {
                 error={usernameError}
                 errorMessage={usernameErrorMessage}
                 onChange={props.handleChange}
+                customStyles={customStyles}
               />
             </div>
 
@@ -79,6 +83,7 @@ const LoginForm = ({ setAuth }) => {
               <MuiInput
                 id="loginPassword"
                 name="loginPassword"
+                type="password"
                 value={props.values.loginPassword}
                 label="Password"
                 error={passwordError}
@@ -87,7 +92,7 @@ const LoginForm = ({ setAuth }) => {
               />
             </div>
 
-            <div>
+            <div className={cc.buttonWrapper}>
               <Button isLoading={isLoading} type="submit">
                 submit
               </Button>
@@ -98,5 +103,15 @@ const LoginForm = ({ setAuth }) => {
     </Formik>
   );
 };
+
+// TODO: style to MuiInput wrapper and button wrapper
+const useStyles = makeStyles({
+  buttonWrapper: {
+    padding: '20px 0px 20px 5px'
+  },
+  loginUsernameInput: {
+    padding: '20px 0px'
+  }
+});
 
 export default LoginForm;

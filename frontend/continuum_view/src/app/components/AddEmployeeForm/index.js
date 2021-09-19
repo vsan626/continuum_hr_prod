@@ -5,6 +5,8 @@ import Button from '../Button';
 import MuiInput from '../Input';
 import { addEmployee } from '../../..//api/addEmployee';
 import { getEmployees } from '../../../api/getEmployees';
+import { makeStyles } from '@material-ui/core/styles';
+
 
 const initialValues = {
   firstname: '',
@@ -18,7 +20,7 @@ const validationSchema = object().shape({
 
 const AddEmployeeForm = ({ setData }) => {
   const [isLoading, setIsLoading] = React.useState(false);
-
+  const cc = useStyles();
   const handleSubmit = async (values) => {
     setIsLoading(true);
 
@@ -46,7 +48,7 @@ const AddEmployeeForm = ({ setData }) => {
       {(props) => {
         return (
           <Form onSubmit={props.handleSubmit}>
-            <div>
+            <div className={cc.firstNameWrapper}>
               <MuiInput
                 id="firstname"
                 name="firstname"
@@ -56,7 +58,7 @@ const AddEmployeeForm = ({ setData }) => {
               />
             </div>
 
-            <div>
+            <div className={cc.lastNameWrapper}>
               <MuiInput
                 id="lastname"
                 name="lastname"
@@ -65,7 +67,7 @@ const AddEmployeeForm = ({ setData }) => {
                 onChange={props.handleChange}
               />
             </div>
-            <div>
+            <div className={cc.salaryWrapper}>
               <MuiInput
                 id="salary"
                 name="salary"
@@ -75,9 +77,9 @@ const AddEmployeeForm = ({ setData }) => {
               />
             </div>
 
-            <div>
+            <div className={cc.buttonWrapper}>
               <Button isLoading={isLoading} type="submit">
-                submit
+                Add
               </Button>
             </div>
           </Form>
@@ -86,5 +88,23 @@ const AddEmployeeForm = ({ setData }) => {
     </Formik>
   );
 };
+
+const useStyles = makeStyles({
+  firstNameWrapper: {
+    padding: '20px 0px'
+  },
+  lastNameWrapper: {
+    paddingBottom: 20
+  },
+  salaryWrapper: {
+    paddingBottom: 20
+  },
+  buttonWrapper: {
+    display: 'flex',
+    justifyContent: 'center',
+    fontFamily: 'Roboto'
+  }
+});
+
 
 export default AddEmployeeForm;

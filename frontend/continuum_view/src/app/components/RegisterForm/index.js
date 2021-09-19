@@ -6,6 +6,7 @@ import MuiInput from '../Input';
 import { register } from '../../../api/register';
 import { Snackbar } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
+import { makeStyles } from '@material-ui/core/styles';
 
 const initialValues = {
   registerUsername: '',
@@ -27,6 +28,7 @@ const RegisterForm = () => {
   const [passwordErrorErrorMessage, setPasswordErrorMessage] =
     React.useState('');
   const [success, setSuccess] = React.useState(false);
+  const cc = useStyles();
 
   const handleSubmit = async (values, { resetForm }) => {
     setPasswordError(false);
@@ -75,7 +77,7 @@ const RegisterForm = () => {
         {(props) => {
           return (
             <Form onSubmit={props.handleSubmit}>
-              <div>
+              <div className={cc.registerUsernameWrapper}>
                 <MuiInput
                   id="registerUsername"
                   name="registerUsername"
@@ -100,8 +102,8 @@ const RegisterForm = () => {
                 />
               </div>
 
-              <div>
-                <Button isLoading={isLoading} type="submit">
+              <div className={cc.buttonWrapper}>
+                <Button isLoading={isLoading} type="submit" color="success">
                   submit
                 </Button>
               </div>
@@ -122,5 +124,14 @@ const RegisterForm = () => {
     </>
   );
 };
+
+const useStyles = makeStyles({
+  buttonWrapper: {
+    padding: '20px 0px 20px 5px'
+  },
+  registerUsernameWrapper: {
+    padding: '20px 0px'
+  }
+});
 
 export default RegisterForm;
