@@ -11,7 +11,6 @@ router.get('/employees', async (req: Request, res: Response) => {
   let decoded;
   if (req.headers && req.headers.authorization) {
     authorization = req.headers.authorization.split(' ')[1];
-    console.log({ authorization });
     try {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       decoded = jwt.verify(authorization, config.jwtSecret!);

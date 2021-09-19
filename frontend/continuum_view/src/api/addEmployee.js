@@ -5,16 +5,16 @@ axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 const addEmployee = async (userData) => {
   const { firstname, lastname, salary } = userData;
+
   try {
     const res = await axios.post('/api/user/newemployee', {
       firstname,
       lastname,
       salary
     });
-    console.log('addEmployee res', res);
+
     return res;
   } catch (err) {
-    console.log('addEmployee err', err);
     throw err.response;
   }
 };

@@ -5,7 +5,6 @@ import Button from '../Button';
 import MuiInput from '../Input';
 import { logIn } from '../../../api/login';
 import { getToken } from '../../../utils/localStorage';
-import { getEmployees } from '../../..//api/getEmployees';
 
 const initialValues = {
   loginUsername: '',
@@ -26,8 +25,6 @@ const LoginForm = ({ setAuth }) => {
     React.useState('');
 
   const handleSubmit = async (values) => {
-    console.log('login values', values);
-
     setPasswordError(false);
     setPasswordErrorMessage('');
     setUsernameError(false);
@@ -42,7 +39,6 @@ const LoginForm = ({ setAuth }) => {
           return getToken();
         });
       }
-      console.log({ loginRes });
     } catch (err) {
       const { data } = err;
       if (data.message === `username ${values.loginUsername} not found`) {

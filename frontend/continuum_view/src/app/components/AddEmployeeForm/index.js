@@ -18,22 +18,13 @@ const validationSchema = object().shape({
 
 const AddEmployeeForm = ({ setData }) => {
   const [isLoading, setIsLoading] = React.useState(false);
-  const [firstnameError, setFirstnameError] = React.useState(false);
-  const [firstnameErrorMessage, setFirstnameErrorMessage] = React.useState('');
-  const [lastnameError, setLastnameError] = React.useState(false);
-  const [lastnameErrorMessage, setLastnameErrorMessage] = React.useState('');
-  const [salaryError, setSalaryError] = React.useState(false);
-  const [salaryErrorErrorMessage, setSalaryErrorMessage] = React.useState('');
 
   const handleSubmit = async (values) => {
-    console.log('login values', values);
-
     setIsLoading(true);
 
     try {
       const addEmployeeRes = await addEmployee(values);
 
-      console.log({ addEmployeeRes });
       if (addEmployeeRes.status === 200) {
         getEmployees().then((data) => setData(data));
       }
@@ -61,8 +52,6 @@ const AddEmployeeForm = ({ setData }) => {
                 name="firstname"
                 value={props.values.firstname}
                 label="First Name"
-                error={firstnameError}
-                errorMessage={firstnameErrorMessage}
                 onChange={props.handleChange}
               />
             </div>
@@ -73,8 +62,6 @@ const AddEmployeeForm = ({ setData }) => {
                 name="lastname"
                 value={props.values.lastname}
                 label="Last Name"
-                error={lastnameError}
-                errorMessage={lastnameErrorMessage}
                 onChange={props.handleChange}
               />
             </div>
@@ -84,8 +71,6 @@ const AddEmployeeForm = ({ setData }) => {
                 name="salary"
                 value={props.values.salary}
                 label="Gross Salary"
-                error={salaryError}
-                errorMessage={salaryErrorErrorMessage}
                 onChange={props.handleChange}
               />
             </div>

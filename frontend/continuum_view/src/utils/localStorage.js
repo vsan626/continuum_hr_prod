@@ -26,8 +26,6 @@ export const destroyToken = () => {
  */
 export const getToken = () => {
   const token = localStorage.getItem('auth');
-  console.log('token', token);
   const parsedToken = JSON.stringify(token);
-  console.log({ parsedToken });
   return parsedToken;
 };

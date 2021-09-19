@@ -10,11 +10,9 @@ const getEmployees = async () => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
   try {
     const data = await axios.get('/api/user/employees');
-    console.log('data from get api', data.data.employees);
 
     return data.data.employees;
   } catch (err) {
-    console.log('err from register api', err);
     throw err.response;
   }
 };

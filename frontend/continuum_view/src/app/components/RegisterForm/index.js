@@ -29,7 +29,6 @@ const RegisterForm = () => {
   const [success, setSuccess] = React.useState(false);
 
   const handleSubmit = async (values, { resetForm }) => {
-    console.log('register values', values);
     setPasswordError(false);
     setPasswordErrorMessage('');
     setUsernameError(false);

@@ -3,7 +3,6 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import MainPage from './pages/MainPage';
 import { getToken } from '../utils/localStorage';
-import { getEmployees } from '../api/getEmployees';
 
 function App() {
   const [loginView, setLoginView] = React.useState(false);
@@ -11,7 +10,6 @@ function App() {
     return getToken();
   });
 
-  console.log({ auth });
   const viewLogin = () => {
     setLoginView(!loginView);
   };
