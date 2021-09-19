@@ -10,7 +10,6 @@ import {
 import Paper from '@material-ui/core/paper';
 import { makeStyles } from '@material-ui/core/styles';
 
-// NOTE: render list of current employees
 const DataTable = ({ data, stateTaxDeduction, netSalary }) => {
   const numberWithCommas = (x) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -64,8 +63,7 @@ const useStyles = makeStyles({
     width: '100%',
     minWidth: 375,
     height: '100%'
-  },
-
+  }
 });
 
 export default DataTable;

@@ -15,7 +15,6 @@ const RegisterPage = () => {
 const useStyles = makeStyles({
   registerFormPageContainer: {
     maxWidth: 300,
-    // border: '1px solid black',
     padding: 20
   },
   registerTextContainer: {

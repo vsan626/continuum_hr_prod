@@ -63,7 +63,6 @@ const LoginForm = ({ setAuth, customStyles }) => {
       enableReinitialize
     >
       {(props) => {
-        console.log('loginform fomike', customStyles);
         return (
           <Form onSubmit={props.handleSubmit}>
             <div className={cc.loginUsernameInput}>

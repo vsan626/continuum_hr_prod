@@ -16,8 +16,7 @@ const MuiInput = (props) => {
     errorMessage,
     label,
     onChange,
-    type,
-    customStyles
+    type
   } = props;
   const [currentValue, setCurrentValue] = React.useState(value);
   const cc = useStyles();
@@ -33,7 +32,6 @@ const MuiInput = (props) => {
     onChange(e);
   };
 
-  console.log('muiinput', customStyles);
   return (
     <FormControl>
       {label !== undefined ? (
@@ -71,7 +69,6 @@ const MuiInput = (props) => {
 // TODO: style the input
 const useStyles = makeStyles({
   inputRoot: {
-    // minWidth: 300,
     maxWidth: '100%',
     border: '1px solid',
     borderRadius: 15,

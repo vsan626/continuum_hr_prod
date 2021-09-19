@@ -71,23 +71,12 @@ const useStyles = makeStyles({
     alignSelf: 'center',
     minWidth: 375,
     height: '100vh',
-    // margin: 0,
     backgroundColor: 'rgba(209, 214, 209, 0.87)'
   },
   mainPageContainer: {
     backgroundColor: 'rgba(209, 214, 209, 0.87)',
-    // border: '1px solid black',
-    // display: 'flex',
-    // flexDirection: 'column',
-    // alignItems: 'center',
-    // justifyContent: 'center',
-    // alignContent: 'center',
-    // alignSelf: 'center',
     minWidth: 375,
     height: '100%',
-    // margin: 0
-    // width: '100%',
-    // paddingTop: 20
   },
   formContentContainer: {
     background: 'rgb(255, 255, 255)',
@@ -96,9 +85,6 @@ const useStyles = makeStyles({
     justifyContent: 'center',
     alignItems: 'center',
     width: 300,
-    // padding: 0,
-    // margin: '0 auto',
-    // alignSelf:'center',
     border: '1px solid black'
   },
   formSelectContainer: {

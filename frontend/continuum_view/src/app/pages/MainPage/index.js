@@ -55,15 +55,9 @@ const MainPage = () => {
 
 const useStyles = makeStyles({
   mainPageContainer: {
-    // backgroundColor: 'rgba(209, 214, 209, 0.87)',
-    // border: '1px solid black',
     display: 'flex',
     flexDirection: 'column',
-    // alignItems: 'center',
     justifyContent: 'center',
-    // alignContent: 'center',
-    // alignSelf: 'center',
-    // height: '100%',
     width: '100%',
     height: '100vh',
     paddingTop: 20
@@ -74,7 +68,6 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    // margin: '20px 0px',
     border: '1px solid black',
     boxShadow: '10px 10px 8px #888888',
     borderRadius: '20px',
@@ -90,8 +83,6 @@ const useStyles = makeStyles({
     justifyContent: 'center',
     padding: 20,
     marginTop: 20,
-    // margin: '20px 0px',
-    // minWidth: 360,
     height: '100%'
   }
 });

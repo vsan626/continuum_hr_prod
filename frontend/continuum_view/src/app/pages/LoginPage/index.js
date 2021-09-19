@@ -17,7 +17,6 @@ const LoginPage = ({ setAuth, customStyles }) => {
 const useStyles = makeStyles({
   loginFormPageContainer: {
     maxWidth: 300,
-    // border: '1px solid black',
     padding: 20
   },
   loginTextContainer: {

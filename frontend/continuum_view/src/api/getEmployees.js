@@ -1,8 +1,6 @@
 import axios from 'axios';
-import { getToken } from '../utils/localStorage';
 
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
-// axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 const getEmployees = async () => {
   const token = localStorage.getItem('auth');
